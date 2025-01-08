@@ -8,13 +8,27 @@ add_executable(minimalloc
   src/converter.cc
   src/main.cc
   src/minimalloc.cc
+  src/rustimer.cpp
   src/solver.cc
   src/sweeper.cc
   src/validator.cc
 )
+add_library(
+  RuStuff
+  STATIC
+  IMPORTED
+)
+set_property(
+  TARGET
+    RuStuff
+  PROPERTY
+    IMPORTED_LOCATION
+      "/home/cappadokes/code/minimalloc/rustimer/target/release/librustimer.a"
+)
 target_link_libraries(minimalloc
   absl::flags_parse
   absl::statusor
+  RuStuff
 )
 
 enable_testing()

@@ -36,6 +36,7 @@ limitations under the License.
 #include "minimalloc.h"
 #include "solver.h"
 #include "validator.h"
+#include "rustimer.h"
 
 ABSL_FLAG(int64_t, capacity, 0, "The maximum memory capacity.");
 ABSL_FLAG(std::string, input, "", "The path to the input CSV file.");
@@ -138,9 +139,11 @@ int main(int argc, char* argv[]) {
   if (!problem.ok()) return 1;
   problem->capacity = absl::GetFlag(FLAGS_capacity);
   minimalloc::Solver solver(params);
-  const absl::Time start_time = absl::Now();
+  //const absl::Time start_time = absl::Now();
+  rust::cxxbridge1::Box<Clock> clk = timer_start();
   absl::StatusOr<minimalloc::Solution> solution = solver.Solve(*problem);
-  const absl::Time end_time = absl::Now();
+  timer_end(std::move(clk));
+  //const absl::Time end_time = absl::Now();
   std::cerr << std::fixed << std::setprecision(3)
       << absl::ToDoubleSeconds(end_time - start_time);
   if (!solution.ok()) return 1;
