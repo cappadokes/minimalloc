@@ -144,8 +144,8 @@ int main(int argc, char* argv[]) {
   absl::StatusOr<minimalloc::Solution> solution = solver.Solve(*problem);
   timer_end(std::move(clk));
   //const absl::Time end_time = absl::Now();
-  std::cerr << std::fixed << std::setprecision(3)
-      << absl::ToDoubleSeconds(end_time - start_time);
+  //std::cerr << std::fixed << std::setprecision(3)
+  //    << absl::ToDoubleSeconds(end_time - start_time);
   if (!solution.ok()) return 1;
   if (absl::GetFlag(FLAGS_validate)) {
     minimalloc::ValidationResult validation_result =

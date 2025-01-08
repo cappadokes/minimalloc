@@ -25,10 +25,16 @@ set_property(
     IMPORTED_LOCATION
       "/home/cappadokes/code/minimalloc/rustimer/target/release/librustimer.a"
 )
+add_library(
+  DLSym
+  INTERFACE
+  IMPORTED
+)
 target_link_libraries(minimalloc
   absl::flags_parse
   absl::statusor
   RuStuff
+  dl
 )
 
 enable_testing()
